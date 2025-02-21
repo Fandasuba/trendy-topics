@@ -16,7 +16,7 @@ export default function TrendsForm() {
     geo: string;
     hl: string;
     timezone?: number;
-    category: number;
+    category: string;
     property: string;
     resolution?: string;
     granularTimeResolution?: boolean;
@@ -29,11 +29,14 @@ export default function TrendsForm() {
           const optionsObject = {
             geo: country,
             hl: 'en',
-            category: parseInt(trendTopic) || 0,
+            category: trendTopic || 'all',
           }
 
           const response = await fetch('/api/trends', {
             method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
             body: JSON.stringify(optionsObject)
           })
 
@@ -42,7 +45,8 @@ export default function TrendsForm() {
           }
 
           const data = await response.json()
-          console.log('Trends data isnide trendsform async:', data,)
+          const parsedData = typeof data === 'string' ? JSON.parse(data) : data
+          console.log('Trends data inside trendsform async:', parsedData)
         } catch (error) {
           console.error('Error fetching trends:', error)
         } finally {
@@ -52,7 +56,7 @@ export default function TrendsForm() {
 
       fetchTrendsData()
     }
-  }, [submit, name, country, trendingRange, trendTopic])
+  }, [submit, country, trendTopic]) // Remove unused dependencies name and trendingRange
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
