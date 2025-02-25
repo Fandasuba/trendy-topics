@@ -4,7 +4,9 @@ Having orignal worked with Socket IO for a Northcoders final project, i decided 
 
 The general idea behind the app is that it is an Omegle style chat room, connecting you to a room with a user randomly. The subject ofd the conversation however is based on trending topics around the world using the unnofficial Google Trends API. This gives people the chance to talk abour trending topics, based on nationality, breaking news, the daily conversation and other such events. Expect a lot of football, politics, and any major weather reports.
 
+### Testing
 
+Ignore this. Quick test for Git Hub issues???
 
 ## Getting started
 
