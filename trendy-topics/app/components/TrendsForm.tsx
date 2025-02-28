@@ -13,32 +13,44 @@ export default function TrendsForm() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-  
+    
+    console.log("Form values before sending:");
+    console.log("Name:", name);
+    console.log("Country:", country || 'united_states');
+    
     try {
-      const response = await fetch('/api/trends', {
+      const response = await fetch('/api/trending', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // Ensure this header is correct
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          geo: country || 'united_states',  // Default to 'united_states' if country is empty
+          geo: country || 'united_states',
         }),
       });
+      
+      console.log("Response status:", response.status);
   
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error response:", errorText);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
   
       const data = await response.json();
+      console.log('Full response data:', data);
       setTrendingResults(data.trending);
       console.log('Trends data:', data.trending);
     } catch (error) {
-      console.error('Error fetching trends:', error);
+      console.error('Error details:', error);
       setError('Failed to load trending data. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
+  useEffect(() => {
+    console.log("Country selection changed to:", country);
+  }, [country]);
   
   return (
     <div className="max-w-4xl mx-auto">
