@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react"
 export default function TrendsForm() {
   const [name, setName] = useState<string>("")
   const [country, setCountry] = useState<string>("")
+  const [trendingRange, setTrendRange] = useState<string>("")
+  const [trendTopic, setTrendTopic] = useState<string>("")
   const [trendingResults, setTrendingResults] = useState<string[] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
@@ -25,7 +27,9 @@ export default function TrendsForm() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          geo: country || 'united_states',
+          geo: country,
+          category: trendTopic,
+          time: trendingRange
         }),
       });
       
@@ -81,60 +85,136 @@ export default function TrendsForm() {
               className="w-full border-2 border-zinc-300 p-3 focus:border-black focus:ring-1 focus:ring-black font-serif text-black bg-white"
             >
                 <option value="">Please select your country...</option>
-                <option value="argentina">Argentina</option>
-                <option value="australia">Australia</option>
-                <option value="austria">Austria</option>
-                <option value="belgium">Belgium</option>
-                <option value="brazil">Brazil</option>
-                <option value="canada">Canada</option>
-                <option value="chile">Chile</option>
-                <option value="colombia">Colombia</option>
-                <option value="czech_republic">Czech Republic</option>
-                <option value="denmark">Denmark</option>
-                <option value="egypt">Egypt</option>
-                <option value="finland">Finland</option>
-                <option value="france">France</option>
-                <option value="germany">Germany</option>
-                <option value="greece">Greece</option>
-                <option value="hong_kong">Hong Kong</option>
-                <option value="hungary">Hungary</option>
-                <option value="india">India</option>
-                <option value="indonesia">Indonesia</option>
-                <option value="ireland">Ireland</option>
-                <option value="israel">Israel</option>
-                <option value="italy">Italy</option>
-                <option value="japan">Japan</option>
-                <option value="kenya">Kenya</option>
-                <option value="malaysia">Malaysia</option>
-                <option value="mexico">Mexico</option>
-                <option value="netherlands">Netherlands</option>
-                <option value="new_zealand">New Zealand</option>
-                <option value="nigeria">Nigeria</option>
-                <option value="norway">Norway</option>
-                <option value="philippines">Philippines</option>
-                <option value="poland">Poland</option>
-                <option value="portugal">Portugal</option>
-                <option value="romania">Romania</option>
-                <option value="russia">Russia</option>
-                <option value="saudi_arabia">Saudi Arabia</option>
-                <option value="singapore">Singapore</option>
-                <option value="south_africa">South Africa</option>
-                <option value="south_korea">South Korea</option>
-                <option value="spain">Spain</option>
-                <option value="sweden">Sweden</option>
-                <option value="switzerland">Switzerland</option>
-                <option value="taiwan">Taiwan</option>
-                <option value="thailand">Thailand</option>
-                <option value="turkey">Turkey</option>
-                <option value="ukraine">Ukraine</option>
-                <option value="united_kingdom">United Kingdom</option>
-                <option value="united_states">United States</option>
-                <option value="vietnam">Vietnam</option>
+                <option value="AL">Albania</option>
+                <option value="DZ">Algeria</option>
+                <option value="AO">Angola</option>
+                <option value="AR">Argentina</option>
+                <option value="AM">Armenia</option>
+                <option value="AU">Australia</option>
+                <option value="AT">Austria</option>
+                <option value="AZ">Azerbaijan</option>
+                <option value="BH">Bahrain</option>
+                <option value="BD">Bangladesh</option>
+                <option value="BY">Belarus</option>
+                <option value="BE">Belgium</option>
+                <option value="BJ">Benin</option>
+                <option value="BO">Bolivia</option>
+                <option value="BA">Bosnia & Herzegovina</option>
+                <option value="BR">Brazil</option>
+                <option value="BG">Bulgaria</option>
+                <option value="BF">Burkina Faso</option>
+                <option value="KH">Cambodia</option>
+                <option value="CM">Cameroon</option>
+                <option value="CA">Canada</option>
+                <option value="CL">Chile</option>
+                <option value="CO">Colombia</option>
+                <option value="CD">Congo - Kinshasa</option>
+                <option value="CR">Costa Rica</option>
+                <option value="CI">Côte d'Ivoire</option>
+                <option value="HR">Croatia</option>
+                <option value="CU">Cuba</option>
+                <option value="CY">Cyprus</option>
+                <option value="CZ">Czechia</option>
+                <option value="DK">Denmark</option>
+                <option value="DO">Dominican Republic</option>
+                <option value="EC">Ecuador</option>
+                <option value="EG">Egypt</option>
+                <option value="SV">El Salvador</option>
+                <option value="EE">Estonia</option>
+                <option value="ET">Ethioia</option>
+                <option value="FI">Finland</option>
+                <option value="FR">France</option>
+                <option value="GE">Georgia</option>
+                <option value="DE">Germany</option>
+                <option value="GH">Ghana</option>
+                <option value="GR">Greece</option>
+                <option value="GT">Guatamala</option>
+                <option value="HT">Haiti</option>
+                <option value="HN">Honduras</option>
+                <option value="HK">Hong Kong</option>
+                <option value="HU">Hungary</option>
+                <option value="IN">India</option>
+                <option value="ID">Indonesia</option>
+                <option value="IR">Iran</option>
+                <option value="IQ">Iraq</option>
+                <option value="IE">Ireland</option>
+                <option value="IL">Israel</option>
+                <option value="IT">Italy</option>
+                <option value="JM">Jamaica</option>
+                <option value="JP">Japan</option>
+                <option value="JO">Jordan</option>
+                <option value="KZ">Kazakhstan</option>
+                <option value="KE">Kenya</option>
+                <option value="KW">Kuwait</option>
+                <option value="KG">Kyrgyzstan</option>
+                <option value="LV">Latvia</option>
+                <option value="LB">Lebanon</option>
+                <option value="LY">Libya</option>
+                <option value="LT">Lithuania</option>
+                <option value="MY">Malaysia</option>
+                <option value="ML">Mali</option>
+                <option value="MX">Mexico</option>
+                <option value="MD">Moldova</option>
+                <option value="MA">Morocco</option>
+                <option value="MZ">Mozambique</option>
+                <option value="MM">Myanmar (Burma)</option>
+                <option value="NP">Nepal</option>
+                <option value="NL">Netherlands</option>
+                <option value="NZ">New Zealand</option>
+                <option value="NI">Nicaragua</option>
+                <option value="NG">Nigeria</option>
+                <option value="MK">North Macedonia</option>
+                <option value="NO">Norway</option>
+                <option value="OM">Oman</option>
+                <option value="PK">Pakistan</option>
+                <option value="PS">Palestine</option>
+                <option value="PA">Panama</option>
+                <option value="PY">Paraguay</option>
+                <option value="PE">Peru</option>
+                <option value="PH">Philippines</option>
+                <option value="PL">Poland</option>
+                <option value="PT">Portugal</option>
+                <option value="PR">Puerto Rico</option>
+                <option value="QA">Qatar</option>
+                <option value="RO">Romania</option>
+                <option value="RU">Russia</option>
+                <option value="SA">Saudi Arabia</option>
+                <option value="SN">Senegal</option>
+                <option value="RS">Serbia</option>
+                <option value="SG">Singapore</option>
+                <option value="SK">Slovakia</option>
+                <option value="SI">Slovenia</option>
+                <option value="ZA">South Africa</option>
+                <option value="KR">South Korea</option>
+                <option value="ES">Spain</option>
+                <option value="LK">Sri Lanka</option>
+                <option value="SE">Sweden</option>
+                <option value="CH">Switzerland</option>
+                <option value="SY">Syria</option>
+                <option value="TW">Taiwan</option>
+                <option value="TZ">Tanzania</option>
+                <option value="TH">Thailand</option>
+                <option value="TT">Trinidad & Tobago</option>
+                <option value="TN">Tunisia</option>
+                <option value="TR">Türkiye</option>
+                <option value="TM">Türkmenistan</option>
+                <option value="UG">Uganda</option>
+                <option value="UA">Ukraine</option>
+                <option value="AE">United Arab Emirates (UAE)</option>
+                <option value="GB">United Kingdom</option>
+                <option value="US">United States</option>
+                <option value="UY">Uruguay</option>
+                <option value="UZ">Uzbekistan</option>
+                <option value="VE">Venezuala</option>
+                <option value="VN">Vietnam</option>
+                <option value="YE">Yemen</option>
+                <option value="ZM">Zambia</option>
+                <option value="ZW">Zimbabwe</option>
           </select>
         </div>
 
         {/* Time frame selection */}
-        {/* <div className="mb-6">
+        <div className="mb-6">
           <label className="block text-black text-lg font-serif mb-2">Publication Schedule</label>
           <select 
             name="selectedTrend"
@@ -142,15 +222,13 @@ export default function TrendsForm() {
             onChange={(e) => setTrendRange(e.target.value)}
             className="w-full border-2 border-zinc-300 p-3 focus:border-black focus:ring-1 focus:ring-black font-serif text-black bg-white"
           >
-            <option value="">Select time range</option>
-            <option value="Past Hour">Latest Edition (Past Hour)</option>
-            <option value="Past 4 hours">Morning Edition (Past 4 Hours)</option>
-            <option value="Past day">Daily Edition (Past 24 Hours)</option>
-            <option value="Past 7 days">Weekly Edition (Past 7 Days)</option>
-          </select>
-        </div> */}
+            <option value="24">Select time range</option>
+            <option value="4">Hot off the press (Past 4 Hours)</option>
+            <option value="24">Daily Edition (Past 24 Hours)</option>
+            </select>
+        </div>
 
-        {/* Topic selection
+        {/* Topic selection */}
         <div className="mb-6">
           <label className="block text-black text-lg font-serif mb-2">News Section</label>
           <select 
@@ -160,17 +238,29 @@ export default function TrendsForm() {
             className="w-full border-2 border-zinc-300 p-3 focus:border-black focus:ring-1 focus:ring-black font-serif text-black bg-white"
           >
             <option value="">Select your section</option>
-            <option value="all">All Categories</option>
-            <option value="b">Business</option>
-            <option value="e">Entertainment</option>
-            <option value="m">Health</option>
-            <option value="s">Sports</option>
-            <option value="t">Science/Tech</option>
-            <option value="h">Top Stories</option>
-            <option value="g">Games</option>
+            <option value="">All Categories</option>
+            <option value="1">Autos & Veichles</option>
+            <option value="2">Beauty</option>
+            <option value="3">Business</option>
+            <option value="20">Climate</option>
+            <option value="4">Entertainment</option>
+            <option value="5">Food & Drink</option>
+            <option value="6">Games</option>
+            <option value="7">Health</option>
+            <option value="8">Hobbies</option>
+            <option value="9">Jobs & Education</option>
+            <option value="10">Legal</option>
+            <option value="11">Other</option>
+            <option value="13">Pets</option>
+            <option value="14">Politics</option>
+            <option value="15">Science</option>
+            <option value="16">Shopping</option>
+            <option value="17">Sports</option>
+            <option value="18">Tech</option>
+            <option value="19">Travel</option>
+
           </select>
         </div>
-      </div> */}
       </div>
 
     {/* Submit button */}
