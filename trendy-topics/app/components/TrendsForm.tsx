@@ -84,7 +84,7 @@ export default function TrendsForm() {
               onChange={(e) => setCountry(e.target.value)}
               className="w-full border-2 border-zinc-300 p-3 focus:border-black focus:ring-1 focus:ring-black font-serif text-black bg-white"
             >
-                <option value="">Please select your country...</option>
+                <option value="US">Please select your country...</option>
                 <option value="AL">Albania</option>
                 <option value="DZ">Algeria</option>
                 <option value="AO">Angola</option>
